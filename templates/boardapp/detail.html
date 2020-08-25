@@ -44,7 +44,11 @@
     <div class="alert alert-success" role="alert">
         <p>投稿者：{{object.author}}</p>
         <p>詳細：{{object.content}}</p>
+
+        <!-- {% if object.images%} -->
+
         <p><img src="{{object.images.url}}" width=300></p>
+        <!-- {% endif %} -->
         <a href="{% url 'good' object.pk %}" class="btn btn-primary btn" role="button" aria-pressed="true">いいね
             {{object.good}}</a>
         <a href="{% url 'read' object.pk %}" class="btn btn-secondary btn" role="button" aria-pressed="true">既読
