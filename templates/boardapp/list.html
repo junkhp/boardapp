@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block customcss %}
+
+{% endblock customcss %}
+
+
+{% block navbar %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="{%url 'list'%}">社内掲示板</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="navbar-brand">{{user.username}}</a>
+            </li>
+            <li>
+                <a class="nav-link" href="{% url 'create' %}">新規投稿<span class="sr-only">(current)</span></a>
+            </li>
+            <li>
+                <a class="nav-link" href="{% url 'logout' %}">ログアウト<span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+{% endblock navbar %}
+
+
+
+{% block header %}
+<div class="alert alert-primary" role="alert">
+    社内掲示板
+</div>
+
+{% endblock header %}
+
+
+{% block content %}
+<div class="container">
+
+    {% for item in object_list %}
+
+    <div class="alert alert-success" role="alert">
+        <p>タイトル：<a href="{% url 'detail' item.pk %}">{{item.title}}</a></p>
+        <p>投稿者：{{item.author}}</p>
+        <a href="{% url 'good' item.pk%}" class="btn btn-primary btn" role="button" aria-pressed="true">いいね
+            {{item.good}}</a>
+        <a href="{% url 'read' item.pk %}" class="btn btn-secondary btn" role="button" aria-pressed="true">既読
+            {{item.read}}</a>
+    </div>
+    {% endfor %}
+    <a href="{% url 'logout' %}">ログアウト</a>
+</div>
+
+{% endblock content %}
